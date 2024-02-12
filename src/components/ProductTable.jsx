@@ -2,8 +2,6 @@
 import ProductRow from "./ProductRow";
 function ProductTable(props){
     const {products} = props;
-    console.log('products', products);
-    console.log('products size', products.length)
     return (
         <div>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

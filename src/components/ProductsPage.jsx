@@ -5,20 +5,27 @@ import ProductTable from "./ProductTable";
 function ProductsPage(){
     const [products, setProducts] = useState(jsonData);
     const [filteredProducts, setFilteredProducts] = useState(jsonData);
+    const [query, setQuery] = useState('');
+    const [check, setCheck] = useState(false);
+
     const filterItems = event => {
+        const query = event.target.value;
+        console.log('check', check);
         const filteredProducts = products.filter(product =>{
-            return product.name.toLowerCase().startsWith(event.target.value.toLowerCase());
+            return product.name.toLowerCase().startsWith(query.toLowerCase()) && (check? product.inStock:true);
         } );
+
+        setQuery(query);
         setFilteredProducts(filteredProducts);
     }
 
     const showOnlyInStock = event => {
-        if(event.target.checked){
-            const inStockProducts = products.filter(product => product.inStock)
-            setFilteredProducts(inStockProducts);
-        } else {
-            setFilteredProducts(products);
-        }
+        const isChecked = event.target.checked;
+        const inStockProducts = products.filter(product => { 
+                return (isChecked? product.inStock:true) && product.name.toLowerCase().startsWith(query.toLowerCase());
+        })
+        setFilteredProducts(inStockProducts);
+        setCheck(isChecked);
     };
 
     return (
