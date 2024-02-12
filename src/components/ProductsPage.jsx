@@ -10,12 +10,11 @@ function ProductsPage(){
 
     const filterItems = event => {
         const query = event.target.value;
-        console.log('check', check);
         const filteredProducts = products.filter(product =>{
             return product.name.toLowerCase().startsWith(query.toLowerCase()) && (check? product.inStock:true);
         } );
 
-        setQuery(query);
+        setQuery(query); //setting state is asynchronous.
         setFilteredProducts(filteredProducts);
     }
 
@@ -25,7 +24,7 @@ function ProductsPage(){
                 return (isChecked? product.inStock:true) && product.name.toLowerCase().startsWith(query.toLowerCase());
         })
         setFilteredProducts(inStockProducts);
-        setCheck(isChecked);
+        setCheck(isChecked); //setting state is asynchronous.
     };
 
     return (
